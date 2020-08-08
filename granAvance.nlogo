@@ -182,7 +182,7 @@ to-report MCTS:apply [r s]
   report MCTS:create-state (listRes) (3 - p)
 end
 
-to-report MCTS:get-result [s p]
+to-report MCTS:get-result_original [s p]
   let pl MCTS:get-playerJustMoved s
   let c MCTS:get-content s
   let val nobody
@@ -199,6 +199,52 @@ to-report MCTS:get-result [s p]
   if empty? MCTS:get-rules s [report 0.5]
   report [false]
 end
+
+
+to-report MCTS:get-result [s p]
+  let pl MCTS:get-playerJustMoved s
+  let c MCTS:get-content s
+
+;  print (word "c de result: "c" visits: "visits" wins: "wins" p: "p)
+
+  let val nobody
+  ; L will have the lines of the board
+  ; 2-blancas 1-negras
+
+
+  ;MCTS:get-result_v2 [1 58 59 60 61 62 63 64 49 50 51 0 53 54 55 56 0 0 0 0 52 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 0 0 0 0 0 9 0 11 12 13 14 15 16 0 2 3 4 5 6 7 8] 2
+
+  let L1 [49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64] ;fichas negras
+  let L2 [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16]  ;fichas blancas
+
+  let w1 sublist c 0 8 ; esto es la linea de abajo donde tiene que llegar las blancas
+  let w2 sublist c 56 64 ; esto es la linea de abajo donde tiene que llegar las negras
+
+    if p = 1 [ ;negras
+    foreach L1 [
+
+    i -> if member? i w2 [  report 1 ]
+    ]
+
+    report 0
+
+  ]
+
+      if p = 2 [ ;blancas
+    foreach L2 [
+
+    i -> if member? i w1 [report 1]
+    ]
+
+    report 0
+
+
+  ]
+
+  report [false]
+end
+
+
 
 to setup
   clear-all
@@ -266,8 +312,8 @@ to play-HvsH
         set newposY round mouse-ycor
       ]
       ; when the mouse is released
-        print (word "turno: "turno " oldposX: "oldposX " oldposY:"oldposY)
-        print (word "turno: "turno " newposX: "newposX " newposY:"newposY)
+ ;       print (word "turno: "turno " oldposX: "oldposX " oldposY:"oldposY)
+ ;       print (word "turno: "turno " newposX: "newposX " newposY:"newposY)
       ask p [
         ifelse (not any? other blancas-on patch mouse-xcor mouse-ycor) and (movimientoValido? oldposX oldposY newposX newposY)
         [
@@ -370,8 +416,8 @@ to play-HvsIA
       ]
 
       ; when the mouse is released
-        print (word "turno: "turno " oldposX: "oldposX " oldposY:"oldposY)
-        print (word "turno: "turno " newposX: "newposX " newposY:"newposY)
+  ;      print (word "turno: "turno " oldposX: "oldposX " oldposY:"oldposY)
+  ;      print (word "turno: "turno " newposX: "newposX " newposY:"newposY)
       ask p [
         ifelse (not any? other blancas-on patch mouse-xcor mouse-ycor) and (movimientoValido? oldposX oldposY newposX newposY)
         [
@@ -380,7 +426,7 @@ to play-HvsIA
 ;          set value id
 
           ask negras with[xcor = newposX and ycor = newposY ][die]
-            actualizarTablero
+          actualizarTablero
           set played? true
           set turno "negras"
           clear-output
@@ -411,14 +457,14 @@ to play-HvsIA
 
     show m
 
-    wait 1
+    wait .5
 
     set newposX pos mod 8
 
     set newposY first [ycor] of negras with [id = pie]
     set newposY newposY - 1
 
-    print(word "newposX: "newposX " newposY: "newposY)
+ ;   print(word "newposX: "newposX " newposY: "newposY)
 
     ask one-of negras with [id = pie][
 
@@ -427,6 +473,8 @@ to play-HvsIA
           set turno "blancas"
           set value id
           ask blancas with[xcor = newposX and ycor = newposY ][die]
+      actualizarTablero
+
           clear-output
           output-print "mueven blancas"
      sound:play-drum "ACOUSTIC SNARE" 64
@@ -454,15 +502,16 @@ to play-IAvsIA
 ;---------------------juegan blancas--------------------------
   if turno = "blancas"[
 
-
+    reset-timer
     let m MCTS:UCT (list (board-to-state) 2) Max_iterations
+    print(word"Timer: "timer)
 
     let pie first m
     let pos last m
 
     show m
 
-    wait 1
+    wait .5
 
     set newposX pos mod 8
 
@@ -493,14 +542,16 @@ to play-IAvsIA
 
 ;  if turno = "negras" [
     ; lets take the move from the MCTS algorithm
+    reset-timer
     let m MCTS:UCT (list (board-to-state) 1) Max_iterations
+    print(word"Timer: "timer)
 
     let pie first m
     let pos last m
 
     show m
 
-    wait 1
+    wait .5
 
     set newposX pos mod 8
 
@@ -613,25 +664,25 @@ NIL
 1
 
 SLIDER
-742
-13
-914
-46
+730
+11
+902
+44
 Max_iterations
 Max_iterations
 1
-5000
-1.0
-50
+1000
+551.0
+5
 1
 NIL
 HORIZONTAL
 
 MONITOR
-743
-60
-917
-105
+731
+58
+905
+103
 Action...
 (word \"Thinking: \" (count MCTSnodes) \" ...\")
 17

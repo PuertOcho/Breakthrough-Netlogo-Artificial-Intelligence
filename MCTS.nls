@@ -45,7 +45,18 @@ end
 ; The 2 summands try to balance between explotation and exploration
 to-report MCTS:UCTSelectChild
   let v visits
-  let child max-one-of out-link-neighbors [(wins / visits) + sqrt(2 * (ln v) / visits)]
+
+;  let child max-one-of out-link-neighbors [(wins / visits) + sqrt(2 * (ln v) / visits)]
+  
+;  let res 0
+  
+  
+;    if wins = visits [set res res + 100] 
+ ;   if wins != visits [set res (wins / visits) + sqrt(2 * (ln v) / visits)]
+  
+  let child max-one-of out-link-neighbors [ (wins / visits) + sqrt(2 * (ln v) / visits) ]
+  
+  ;print (word "UCTSelectChild wins: "wins" visits: "visits" child: "child " res: "res" state: "state)
   report child
 end
 
