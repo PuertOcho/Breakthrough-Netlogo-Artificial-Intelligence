@@ -1,4 +1,4 @@
----------------------------------¿QUÉ ES?---------------------------------
+----------------------------------- ¿QUÉ ES ?-----------------------------------
 Gran Avance es un abstracto juego de estrategia inventado por Dan Troyka en el año 2000. En el 2001 
 ganó la Competición de Diseño de Juegos 8x8 y tiene cierta similitud con las damas, pero la estrategia 
 es completamente diferente.
@@ -11,7 +11,7 @@ diagonalmente siempre y cuando la casilla de destino esté libre. Una ficha pued
 una casilla ocupada por otra del rival siempre y cuando esté una casilla delante diagonalmente.
 La partida finaliza si uno de los jugadores alcanza la fila principal del adversario.
 
----------------------------------¿COMO SE USA?---------------------------------
+--------------------------------- ¿COMO SE USA? ---------------------------------
 Para usarlo haz click en el boton HvsH en caso de que quieran jugar dos jugadors humanos o si prefieres 
 jugar contra una inteligencia aritficial haz click en HvsIA. Trás esto haz click en setup.
 Ahora solo tienes que hacer click en la ficha que quieras mover en caso de que el juego muestre tu turno 
