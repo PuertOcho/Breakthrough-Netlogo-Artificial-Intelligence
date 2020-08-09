@@ -12,19 +12,23 @@ Para usarlo haz click en el boton HvsH en caso de que quieran jugar dos jugadors
 Ahora solo tienes que hacer click en la ficha que quieras mover en caso de que el juego muestre tu turno y arrastrarla a la casilla donde se desee moverla.
 Una vez finalizada la partida se mostrará un cartel donde se indique que jugador ha ganado, trás esto puedes volver a hacer click en setup para reinciar la partida y volver a jugar.
 
-### Ejemplo 1
+### Parametro
+
+* **Max_iterations** : indicamos cuanto de complejo será la IA. A mayor numero de iteraciones, mas epocas y posibles jugadas tendra de vision nuestra IA. Teniendo como contrapartida, un mayor tiempo de procesamiento. (Thinking ...)
+
+### Modos de juego
 
 
-* El **primer parámetro** hará referencia a la cantidad de información mínima que se necesita en cualquiera de las ramas para seguir desarrollando hacia abajo, si no se llega a este tamaño mínimo que nosotros pongamos esa rama dará lugar a un nodo hoja con el resultado expresado en porcentaje. Este porcentaje se consigue viendo sobre cada entrada correspondiente a una rama en concreto y viendo el resultado que obtenemos como respuesta.
+* **play-HvsH** : Modo de juego humano contra humano
 
-  Con **tamaño mínimo** 6 si una rama dada no contiene al menos 6 entradas de datos, devolvemos los porcentajes correspondientes a la respuesta que obtenemos hasta esa parte.
+* **play-HvsIA** : Modo de juego humano contra IA
+
+* **play-IAvsIA** : Modo de juego IA contra IA
+
+# Ejemplo IA vs IA
 
 
-* El **segundo parámetro** indicará la **profundidad máxima** del árbol, de forma que cuando una rama se expanda hasta llegar al límite puesto por el parámetro dará un resultado en forma de porcentaje al igual que en el parámetro anterior.
-
-  Con **profundidad** 2 estamos obligando a las ramas a tener hasta profundidad 2 del árbol, lo que significa que cortamos lo que seguiría de la rama y colocamos directamente los porcentajes al igual que el primer parámetro.
-
-
+![](images/granAvanceIAvsIAViewGif.gif)
 
 
 
