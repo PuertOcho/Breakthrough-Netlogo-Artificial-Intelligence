@@ -14,16 +14,18 @@ Una vez finalizada la partida se mostrará un cartel donde se indique que jugado
 
 ### Parametro
 
-* **Max_iterations** : indicamos cuanto de complejo será la IA. A mayor numero de iteraciones, mas epocas y posibles jugadas tendra de vision nuestra IA. Teniendo como contrapartida, un mayor tiempo de procesamiento. (Thinking ...)
+* **setup** : inicializa el entorno de juego.
+
+* **Max_iterations** : indicamos cuanto de complejo será la IA. A mayor numero de iteraciones, mas epocas y posibles jugadas tendra de vision nuestra IA. Teniendo como contrapartida, un mayor tiempo de procesamiento. (Thinking ...).
 
 ### Modos de juego
 
 
-* **play-HvsH** : Modo de juego humano contra humano
+* **play-HvsH** : Modo de juego humano contra humano.
 
-* **play-HvsIA** : Modo de juego humano contra IA
+* **play-HvsIA** : Modo de juego humano contra IA.
 
-* **play-IAvsIA** : Modo de juego IA contra IA
+* **play-IAvsIA** : Modo de juego IA contra IA.
 
 # Ejemplo IA vs IA
 
